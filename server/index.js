@@ -60,6 +60,10 @@ app.get('/getallUrl', async (req, res) => {
     }
 });
 
+app.get('/', (req, res)=>{
+    res.send('run at path /');
+})
+
 // Endpoint to redirect short URLs to the original URL
 app.get('/:shortUrl', async (req, res) => {
     const shortUrl = req.params.shortUrl;
