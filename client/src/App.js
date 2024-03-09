@@ -5,6 +5,7 @@ import QrCodeGenerator from './QrCodeGenerator';
 
 function App() {
   const [data, setData] = useState(null);
+  const host = 'http://localhost:5000/'
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,19 +35,19 @@ function App() {
         </form>
         {/* <ShortUrl /> */}
         <div className='list-box'>
-          <h2>History short URL</h2>
+          <h2>Shorted URL</h2>
           {data && data.length > 0 ? (
             <ul className='list-item'>
               {[...data].reverse().map((url) => (
                 <li key={url._id} className='row'>
                   <div className='txt-overflow'>Original URL: <a href={url.url}>{url.url}</a></div>
                   <div className='r-box'>
-                    <div>Short URL: <a href={url.url} target='_blank' rel='noopener noreferrer' className='link-short'>https://greentea/{url.shortUrl}</a>
-                      <CopyToClipboard text={url.shortUrl}>
+                    <div>Short URL: <a href={host+url.shortUrl} target='_blank' rel='noopener noreferrer' className='link-short'>{url.shortUrl}</a>
+                      <CopyToClipboard text={host+url.shortUrl}>
                         <button>Copy</button>
                       </CopyToClipboard>
                     </div>
-                    <QrCodeGenerator url={url.url} />
+                    <QrCodeGenerator url={host+url.url} />
                   </div>
                 </li>
               ))}
