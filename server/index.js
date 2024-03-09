@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const shortid = require('shortid');
 const cors = require('cors');
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -26,6 +25,7 @@ db.once('open', () => {
 const urlSchema = new mongoose.Schema({
     url: String,
     shortUrl: String,
+    click: Number,
 });
 
 const Url = mongoose.model('Url', urlSchema);
@@ -38,9 +38,10 @@ app.use(express.urlencoded({ extended: false }));
 app.post('/shorten', async (req, res) => {
     const { url } = req.body;
     const shortUrl = shortid.generate();
+    const click = 0;
     try {
         // Save the URL in the database
-        await Url.create({ url, shortUrl });
+        await Url.create({ url, shortUrl, click });
         // Send the short URL back to the client
         res.redirect('http://localhost:3000/')
     } catch (error) {
@@ -56,13 +57,9 @@ app.get('/getallUrl', async (req, res) => {
         res.json(allUrlDocuments);
     } catch (error) {
         console.error('Error retrieving all URLs:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Internal Server Error'});
     }
 });
-
-app.get('/', (req, res)=>{
-    res.send('run at path /');
-})
 
 // Endpoint to redirect short URLs to the original URL
 app.get('/:shortUrl', async (req, res) => {
@@ -71,6 +68,7 @@ app.get('/:shortUrl', async (req, res) => {
         const result = await Url.findOne({ shortUrl });
 
         if (result) {
+            result.click++;
             res.redirect(result.url);
         } else {
             res.status(404).json({ error: 'URL not found' });

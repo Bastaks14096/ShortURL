@@ -5,11 +5,12 @@ import QrCodeGenerator from './QrCodeGenerator';
 
 function App() {
   const [data, setData] = useState(null);
-  const host = 'http://localhost:5000/'
+  const host = 'https://short-url-opal.vercel.app/'
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/getallUrl');
+        const response = await fetch('https://short-url-opal.vercel.app/getallUrl');
         const result = await response.json();
         console.log(result)
         setData(result);
@@ -29,7 +30,7 @@ function App() {
       </nav>
       <section className='container'>
         <h1>Make URL to short</h1>
-        <form action='http://localhost:5000/shorten' method='post'>
+        <form action='https://short-url-opal.vercel.app/shorten' method='post'>
           <input type='text' placeholder='Enter URL to make short' name='url' required></input>
           <button>Shorten URL</button>
         </form>
