@@ -40,9 +40,6 @@ app.post('/shorten', async (req, res) => {
     }
 });
 
-app.get('/', (req, res)=>{
-    res.send('Server running');
-})
 
 app.get('/getallUrl', async (req, res) => {
     const allUrlDocuments = await Url.find();
