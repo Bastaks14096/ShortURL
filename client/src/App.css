@@ -174,8 +174,8 @@ footer {
   list-style: none;
   margin: 0 auto;
   max-width: 690px;
-  border-bottom: 2px solid #4401c9;
-  border-top: 2px solid #4401c9;
+  border-bottom: 2px solid #e4e4e4;
+  border-top: 2px solid #e4e4e4;
   padding: 1rem 0;
   position: relative;
 }
@@ -221,6 +221,7 @@ footer {
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin: 2rem auto;
 }
 
 .list-box {
@@ -236,10 +237,22 @@ footer {
 }
 
 .short-box {
-  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
+.copy-btn {
+  position: relative;
+}
 
+.copy-btn span{
+  position: absolute;
+  top: 30%;
+  right: -130%;
+}
 
 .short-box a {
   padding: 1rem;
@@ -248,7 +261,7 @@ footer {
 }
 .short-box i {
   padding: 0 .3rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .list-item {
@@ -256,5 +269,5 @@ footer {
   margin: 0 auto;
   overflow: auto;
   height: 30rem;
-  border-top:  4px solid #4101c2;
+  border-top:  4px solid #e4e4e4;
 }

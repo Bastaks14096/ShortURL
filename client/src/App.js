@@ -7,13 +7,21 @@ function App() {
   const [data, setData] = useState(null);
   const host = 'https://short-url-opal.vercel.app/';
   // const host = 'http://localhost:5000/';
+  
+  const [copyAlertVisible, setCopyAlertVisible] = useState(false);
+
+  const handleCopyClick = () => {
+    setCopyAlertVisible(true);
+    setTimeout(() => {
+      setCopyAlertVisible(false);
+    }, 1500);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(`${host}getallUrl`);
         const result = await response.json();
-        console.log(result)
         setData(result);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -27,13 +35,12 @@ function App() {
     <>
       <nav className='nav'>
         <div className='logo'>SPACE URL</div>
-        
       </nav>
       <section className='container'>
         <h1>Make URL to short</h1>
-        <form action={host+'shorten'} method='post'>
+        <form action={host + 'shorten'} method='post'>
           <input type='text' placeholder='Enter URL to make short' name='url' required></input>
-          <button>Shorten URL</button>
+          <button>Short URL</button>
         </form>
         {/* <ShortUrl /> */}
         <div className='list-box'>
@@ -45,13 +52,19 @@ function App() {
                   <div className='txt-overflow'>URL: <a href={url.url}>{url.url}</a></div>
                   <p className='click-txt'>Clicked: <span>{url.click}</span></p>
                   <div className='r-box'>
-                    <div className='short-box'><p>Short URL:</p>
-                      <a href={host+url.shortUrl} target='_blank' rel='noopener noreferrer' className='link-short'>{host+url.shortUrl}</a>
-                      <CopyToClipboard text={host+url.shortUrl}>
-                        <button><i className="fa-regular fa-copy"></i></button>
-                      </CopyToClipboard>
+                    <p>Short URL:</p>
+                    <div className='short-box'>
+                      <a href={host + url.shortUrl} target='_blank' rel='noopener noreferrer' className='link-short'>{host + url.shortUrl}</a>
+                      <div className='copy-btn'>
+                        <CopyToClipboard text={host + url.shortUrl} onCopy={handleCopyClick}>
+                          <button><i className="fa-regular fa-copy"></i></button>
+                        </CopyToClipboard>
+                        {copyAlertVisible && <span id='copy-alert'>Copied!</span>}
+                      </div>
                     </div>
-                    <QrCodeGenerator url={host+url.url} />
+                    <div className='qr-code'>
+                      <QrCodeGenerator url={host + url.url} />
+                    </div>
                   </div>
                 </li>
               ))}
