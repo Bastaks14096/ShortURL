@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: true}))
 // Enable CORS for all routes
 app.use(cors());
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost/url-shortener', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://admin:1234@cluster0.pjwwrw7.mongodb.net/short_url', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Define URL schema
 const urlSchema = new mongoose.Schema({
