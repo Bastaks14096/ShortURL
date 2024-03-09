@@ -5,12 +5,13 @@ import QrCodeGenerator from './QrCodeGenerator';
 
 function App() {
   const [data, setData] = useState(null);
-  const host = 'https://short-url-opal.vercel.app/'
+  const host = 'https://short-url-opal.vercel.app/';
+  // const host = 'http://localhost:5000/';
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://short-url-opal.vercel.app/getallUrl');
+        const response = await fetch(`${host}getallUrl`);
         const result = await response.json();
         console.log(result)
         setData(result);
@@ -25,12 +26,12 @@ function App() {
   return (
     <>
       <nav className='nav'>
-        <div className='logo'>GREEN TEA</div>
+        <div className='logo'>SPACE URL</div>
         
       </nav>
       <section className='container'>
         <h1>Make URL to short</h1>
-        <form action='https://short-url-opal.vercel.app/shorten' method='post'>
+        <form action={host+'shorten'} method='post'>
           <input type='text' placeholder='Enter URL to make short' name='url' required></input>
           <button>Shorten URL</button>
         </form>
@@ -41,12 +42,13 @@ function App() {
             <ul className='list-item'>
               {[...data].reverse().map((url) => (
                 <li key={url._id} className='row'>
-                  <div className='txt-overflow'>Original URL: <a href={url.url}>{url.url}</a></div>
-                  <p>Clicked: <span>{url.click}</span></p>
+                  <div className='txt-overflow'>URL: <a href={url.url}>{url.url}</a></div>
+                  <p className='click-txt'>Clicked: <span>{url.click}</span></p>
                   <div className='r-box'>
-                    <div>Short URL: <a href={host+url.shortUrl} target='_blank' rel='noopener noreferrer' className='link-short'>{url.shortUrl}</a>
+                    <div className='short-box'><p>Short URL:</p>
+                      <a href={host+url.shortUrl} target='_blank' rel='noopener noreferrer' className='link-short'>{host+url.shortUrl}</a>
                       <CopyToClipboard text={host+url.shortUrl}>
-                        <button>Copy</button>
+                        <button><i className="fa-regular fa-copy"></i></button>
                       </CopyToClipboard>
                     </div>
                     <QrCodeGenerator url={host+url.url} />

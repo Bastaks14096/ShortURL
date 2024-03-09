@@ -5,12 +5,13 @@ const shortid = require('shortid');
 const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5000;
+const dbURL = process.env.MONGODB_URI || "mongodb+srv://admin:1234@cluster0.pjwwrw7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 // Enable CORS for all routes
 app.use(cors());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(dbURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
@@ -66,10 +67,11 @@ app.get('/:shortUrl', async (req, res) => {
     const shortUrl = req.params.shortUrl;
     try {
         const result = await Url.findOne({ shortUrl });
-        console.log(result)
 
+        console.log(result)
         if (result) {
             result.click++;
+            result.save();
             res.redirect(result.url);
         } else {
             res.status(404).json({ error: 'URL not found' });

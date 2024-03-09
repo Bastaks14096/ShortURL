@@ -4,6 +4,58 @@
   }
 }
 
+body {
+  background: linear-gradient(229deg, #320390, #740047, #004b10);
+  background-size: 600% 600%;
+
+  -webkit-animation: AnimationName 20s ease infinite;
+  -moz-animation: AnimationName 20s ease infinite;
+  animation: AnimationName 20s ease infinite;
+  color: #fff;
+}
+
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 75% 0%
+  }
+
+  50% {
+    background-position: 26% 100%
+  }
+
+  100% {
+    background-position: 75% 0%
+  }
+}
+
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 75% 0%
+  }
+
+  50% {
+    background-position: 26% 100%
+  }
+
+  100% {
+    background-position: 75% 0%
+  }
+}
+
+@keyframes AnimationName {
+  0% {
+    background-position: 75% 0%
+  }
+
+  50% {
+    background-position: 26% 100%
+  }
+
+  100% {
+    background-position: 75% 0%
+  }
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
@@ -11,20 +63,23 @@
   font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 0;
+  font-weight: 300;
 }
 
-nav, .container, footer{
+nav,
+.container,
+footer {
   min-width: 300px;
 }
 
-nav{
+nav {
   padding: 1rem;
   max-width: 960px;
   margin: 0 auto;
 }
 
 .logo {
-  color: #6BA36C;
+  color: #fff;
   font-size: 1.3rem;
   font-weight: 500;
 }
@@ -32,9 +87,20 @@ nav{
 .container {
   padding: 2rem 1rem;
   text-align: center;
+  background-color: #100c18c2;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0px 0px 10px #000;
+  border-radius: 6px;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
-.container form{
+h1, h2 {
+  text-transform: uppercase;
+}
+
+.container form {
   max-width: 690px;
   margin: 2rem auto;
   width: 100%;
@@ -48,39 +114,44 @@ nav{
 input {
   width: 25rem;
   height: 3rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: 0.5rem;
-  border: none;
-  border-bottom: 3px solid #dbdbdb;
+  border-radius: 6px;
+  background-color: #000000;
+  color: #fff;
+  border: 1px solid #363636;
   outline: none;
   transition: .3s;
-  margin: 1rem 0;
+  margin: 1rem 1rem;
 }
 
 input:focus {
-  border-bottom: 3px solid #6BA36C;
-  transition: .3s;
+  border: 1px solid #0578d6;
+  color: #fff;
 }
 
 button {
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
   padding: 0.5rem;
   outline: none;
-  border: 2px solid #507a51;
-  background-color: #6BA36C;
+  border: 1px solid #0578d6;
+  background-color: #000;
+  border-radius: 6px;
   color: #fff;
   height: 3rem;
+  transition: .3s;
 }
 
 button:hover {
-  background-color: #dbdbdb;
-  color: #000;
+  background-color: #19004d;
+  color: #ffffff;
   transition: .5s;
+  box-shadow: 0px 0px 10px #4101c2;
 }
 
 
-.shortUrl{
+.shortUrl {
   margin-top: 3rem;
   display: flex;
   justify-content: center;
@@ -97,43 +168,66 @@ footer {
   padding: 1rem;
 }
 
+
+
 .row {
   list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
   margin: 0 auto;
   max-width: 690px;
-  border-bottom: 2px solid #507a51;
-  border-top: 2px solid #507a51;
+  border-bottom: 2px solid #4401c9;
+  border-top: 2px solid #4401c9;
   padding: 1rem 0;
+  position: relative;
+}
+
+.row a {
+  color: #3aa6fd;
+}
+
+.row .click-txt {
+  position: absolute;
+  right: 1rem;
+  top: 1.2rem;
+}
+
+
+.click-txt span{
+  color: #0578d6;
+  font-weight: 500;
+}
+
+::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #4e4e4e;
 }
 
 .row:first-child {
-  border-top: 4px solid #507a51;
+  border-top: none;
 }
 
 .row .txt-overflow {
-  white-space: nowrap; 
-  width: 15rem; 
+  white-space: nowrap;
+  max-width: 16rem;
   overflow: hidden;
   text-overflow: ellipsis;
+  /* background-color: red; */
+  font-size: 1.1rem;
 }
 
-.row .r-box{
+.row .r-box {
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  flex-direction: column;
   width: 100%;
-  margin-top: 1rem;
 }
 
 .list-box {
   margin-top: 3rem;
 }
 
-.list-box h2{
+.list-box h2 {
   margin-bottom: 1rem;
 }
 
@@ -141,9 +235,26 @@ footer {
   margin-right: 1rem;
 }
 
-.list-item{
+.short-box {
+  margin: 2rem auto;
+}
+
+
+
+.short-box a {
+  padding: 1rem;
+  display: block;
+
+}
+.short-box i {
+  padding: 0 .3rem;
+  font-size: 1rem;
+}
+
+.list-item {
   max-width: 690px;
   margin: 0 auto;
   overflow: auto;
   height: 30rem;
+  border-top:  4px solid #4101c2;
 }
