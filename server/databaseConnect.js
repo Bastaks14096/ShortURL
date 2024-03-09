@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const localDB = 'mongodb+srv://admin:1234@cluster0.pjwwrw7.mongodb.net/'; // your mongodb database link
+const localDB = ''; // your mongodb database link
 
 const dbURL = process.env.MONGODB_URI || localDB;
 
