@@ -46,6 +46,10 @@ app.get('/getallUrl', async (req, res) => {
     res.json(allUrlDocuments);
 })
 
+app.get('/', (req, res)=>{
+    res.send('server running at path /')
+})
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
