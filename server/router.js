@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const shortid = require('shortid');
 const mongoose = require('./databaseConnect');
+const host = 'https://short-url-61bg.vercel.app/'
 
 // Define URL schema
 const urlSchema = new mongoose.Schema({
@@ -22,7 +23,7 @@ router.post('/shorten', async (req, res) => {
         // Save the URL in the database
         await Url.create({ url, shortUrl, click });
         // Send the short URL back to the client
-        res.redirect('http://localhost:3000/')
+        res.redirect(host);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
