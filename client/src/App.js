@@ -6,7 +6,7 @@ import QrCodeGenerator from './QrCodeGenerator';
 function App() {
   const [data, setData] = useState(null);
   const host = 'https://short-url-opal.vercel.app/'
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,6 +42,7 @@ function App() {
               {[...data].reverse().map((url) => (
                 <li key={url._id} className='row'>
                   <div className='txt-overflow'>Original URL: <a href={url.url}>{url.url}</a></div>
+                  <p>Clicked: <span>{url.click}</span></p>
                   <div className='r-box'>
                     <div>Short URL: <a href={host+url.shortUrl} target='_blank' rel='noopener noreferrer' className='link-short'>{url.shortUrl}</a>
                       <CopyToClipboard text={host+url.shortUrl}>

@@ -25,7 +25,7 @@ db.once('open', () => {
 const urlSchema = new mongoose.Schema({
     url: String,
     shortUrl: String,
-    click: Number,
+    click: Number
 });
 
 const Url = mongoose.model('Url', urlSchema);
@@ -66,6 +66,7 @@ app.get('/:shortUrl', async (req, res) => {
     const shortUrl = req.params.shortUrl;
     try {
         const result = await Url.findOne({ shortUrl });
+        console.log(result)
 
         if (result) {
             result.click++;
