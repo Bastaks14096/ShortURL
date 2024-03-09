@@ -7,13 +7,20 @@ function App() {
   const [data, setData] = useState(null);
   const host = 'https://short-url-opal.vercel.app/';
   // const host = 'http://localhost:5000/';
-  
-  const [copyAlertVisible, setCopyAlertVisible] = useState(false);
 
-  const handleCopyClick = () => {
-    setCopyAlertVisible(true);
+  const [copyAlerts, setCopyAlerts] = useState({});
+
+  const handleCopyClick = (urlId) => {
+    setCopyAlerts((prevAlerts) => ({
+      ...prevAlerts,
+      [urlId]: true,
+    }));
+
     setTimeout(() => {
-      setCopyAlertVisible(false);
+      setCopyAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        [urlId]: false,
+      }));
     }, 1500);
   };
 
@@ -56,10 +63,10 @@ function App() {
                     <div className='short-box'>
                       <a href={host + url.shortUrl} target='_blank' rel='noopener noreferrer' className='link-short'>{host + url.shortUrl}</a>
                       <div className='copy-btn'>
-                        <CopyToClipboard text={host + url.shortUrl} onCopy={handleCopyClick}>
+                        <CopyToClipboard text={host + url.shortUrl} onCopy={() => handleCopyClick(url._id)}>
                           <button><i className="fa-regular fa-copy"></i></button>
                         </CopyToClipboard>
-                        {copyAlertVisible && <span id='copy-alert'>Copied!</span>}
+                        {copyAlerts[url._id] && <span id={`copy-alert-${url._id}`}>Copied!</span>}
                       </div>
                     </div>
                     <div className='qr-code'>
