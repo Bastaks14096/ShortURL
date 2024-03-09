@@ -1,8 +1,7 @@
 # SPACE URL
 
 ## install
-- server
-[![server]()
+### _server_
 in databaseConnect.js must configure it for localDb.
 ```sh
 const localDB = ''; // your mongodb database link
@@ -18,7 +17,7 @@ node index.js
 server will running at [https://localhost:5000/](https://localhost:5000/)
 
 
-[![client]()
+### _client_
 go to server directory use
 ```sh
 cd client
