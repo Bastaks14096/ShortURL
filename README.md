@@ -14,7 +14,7 @@ run command
 ```sh
 node index.js
 ```
-server will running at [https://localhost:5000/](https://localhost:5000/)
+server will running at [localhost:5000/](localhost:5000/)
 
 
 ### _client_
@@ -26,4 +26,4 @@ run command
 ```sh
 npm start
 ```
-server will running at [https://localhost:3000/](https://localhost:3000/)
+server will running at [localhost:3000/](localhost:3000/)
