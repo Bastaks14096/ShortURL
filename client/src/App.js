@@ -38,6 +38,33 @@ function App() {
     fetchData();
   }, []);
 
+  const validateURL = (url) => {
+    const urlPattern = /^(http:\/\/|https:\/\/)/; // Regular expression pattern for http/https
+    return urlPattern.test(url);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const urlInput = event.target.url.value;
+    if (!validateURL(urlInput)) {
+      alert("Please enter a URL starting with 'http://' or 'https://'.");
+      return;
+    }
+    try {
+      const response = await fetch(`${host}shorten`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url: urlInput }),
+      });
+      const result = await response.json();
+      setData([result, ...data]); // Add the new shortened URL to the beginning of the list
+    } catch (error) {
+      console.error('Error shortening URL:', error);
+    }
+  };
+
   return (
     <>
       <nav className='nav'>
@@ -45,13 +72,12 @@ function App() {
       </nav>
       <section className='container'>
         <h1>Make URL to short</h1>
-        <form action={host + 'shorten'} method='post'>
+        <form onSubmit={handleSubmit}>
           <input type='text' placeholder='Enter URL to make short' name='url' required></input>
           <button>Short URL</button>
         </form>
-        {/* <ShortUrl /> */}
         <div className='list-box'>
-          <h2>Shorted URL</h2>
+          <h2>Shortened URL</h2>
           {data && data.length > 0 ? (
             <ul className='list-item'>
               {[...data].reverse().map((url) => (
@@ -71,7 +97,6 @@ function App() {
                     </div>
                     <div className='qr-code'>
                       <QrCodeGenerator url={url.url} />
-                      {/* <p>{url.url}</p> */}
                     </div>
                   </div>
                 </li>
