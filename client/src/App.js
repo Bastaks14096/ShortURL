@@ -70,7 +70,7 @@ function App() {
                       </div>
                     </div>
                     <div className='qr-code'>
-                      <QrCodeGenerator url={host + url.url} />
+                      <QrCodeGenerator url={url.url} />
                     </div>
                   </div>
                 </li>
