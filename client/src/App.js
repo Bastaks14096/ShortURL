@@ -96,7 +96,7 @@ function App() {
                       </div>
                     </div>
                     <div className='qr-code'>
-                      <QrCodeGenerator url={url.url} />
+                      <QrCodeGenerator url={host + url.shortUrl} />
                     </div>
                   </div>
                 </li>
